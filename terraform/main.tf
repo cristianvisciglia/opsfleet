@@ -26,5 +26,13 @@ module "vpc" {
   private_subnet_names = ["${local.name_prefix}-private-subnet"]
   public_subnet_names = ["${local.name_prefix}-public-subnet"]
   
-  
+}
+
+module "eks" {
+    source = "./modules/eks"
+
+    cluster_name = "${var.env}-${var.project}-cluster"
+    vpc_id = module.vpc.vpc_id
+    private_subnet_ids = module.vpc.private_subnet_ids
+
 }
