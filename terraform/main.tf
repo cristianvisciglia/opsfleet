@@ -42,10 +42,6 @@ module "eks" {
     private_subnet_ids = module.vpc.private_subnet_ids
     cluster_version = "1.32"
 
-    providers = {
-      aws = aws
-    }
-
 }
 
 provider "kubernetes" {
@@ -75,8 +71,8 @@ module "karpenter" {
     iam_role_name = module.eks.iam_role_name
 
     providers = {
-    kubernetes = kubernetes.karpenter
-    helm = helm.karpenter
+      kubernetes = kubernetes.karpenter
+      helm = helm.karpenter
     }
 
 }
