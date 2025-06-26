@@ -32,6 +32,7 @@ Then apply the infrastructure:
 
 ```bash
 terraform init
+terraform apply -target=module.eks
 terraform apply
 ```
 ### ⚙️ Post-Deployment Setup

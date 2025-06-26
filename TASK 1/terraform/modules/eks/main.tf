@@ -1,11 +1,11 @@
-terraform {
-  required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = ">= 5.95.0, < 6.0.0"
-    }
-  }
-}
+# terraform {
+#   required_providers {
+#     aws = {
+#       source  = "hashicorp/aws"
+#       version = ">= 5.95.0, < 6.0.0"
+#     }
+#   }
+# }
 module "eks" {
     source  = "terraform-aws-modules/eks/aws"
     version = "~> 20.37.1"
