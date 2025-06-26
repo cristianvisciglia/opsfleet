@@ -1,0 +1,46 @@
+apiVersion: karpenter.sh/v1
+kind: NodePool
+metadata:
+  name: x86-nodepool
+spec:
+  # Límites del NodePool
+  limits:
+    cpu: 1000
+    memory: 1000Gi
+
+  template:
+    metadata:
+      labels:
+        nodepool: "x86"
+        arch: "amd64"
+    spec:
+      nodeClassRef:
+        group: karpenter.k8s.aws
+        kind: EC2NodeClass
+        name: x86-nodeclass
+
+      # Requisitos para instancias x86
+      requirements:
+        - key: kubernetes.io/arch
+          operator: In
+          values: ["amd64"]
+        - key: node.kubernetes.io/instance-type
+          operator: In
+          values:
+            - "m5.large"
+            - "m5.xlarge"
+            - "m5.2xlarge"
+            - "m5.4xlarge"
+            - "c5.large"
+            - "c5.xlarge"
+            - "c5.2xlarge"
+            - "c5.4xlarge"
+            - "r5.large"
+            - "r5.xlarge"
+            - "r5.2xlarge"
+        - key: karpenter.sh/capacity-type
+          operator: In
+          values: ["spot"]
+
+      # Configuración de terminación
+      terminationGracePeriod: 30s

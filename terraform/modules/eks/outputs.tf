@@ -22,3 +22,8 @@ output "worker_iam_role_arn" {
   description = "Node's group IAM ARN"
   value       = try(module.eks.eks_managed_node_groups["default"].iam_role_arn, null)
 }
+
+output "iam_role_name" {
+  description = "value"
+  value = module.eks.eks_managed_node_groups["karpenter"].iam_role_name
+}

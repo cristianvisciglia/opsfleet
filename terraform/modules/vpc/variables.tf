@@ -21,6 +21,16 @@ variable "public_subnets" {
     default = []
 }
 
+variable "enable_natgw" {
+    type = bool
+    default = false
+}
+
+variable "single_natgw" {
+    type = bool
+    default = false
+}
+
 variable "private_subnet_names" {
     type = list(string)
     default = []
@@ -29,6 +39,11 @@ variable "private_subnet_names" {
 variable "public_subnet_names" {
     type = list(string)
     default = []
+}
+
+variable "cluster_name" {
+    type = string
+    description = "Cluster Name"
 }
 
 variable "tags" {

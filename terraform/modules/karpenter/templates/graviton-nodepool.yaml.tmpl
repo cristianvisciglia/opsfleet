@@ -1,0 +1,46 @@
+apiVersion: karpenter.sh/v1
+kind: NodePool
+metadata:
+  name: graviton-nodepool
+spec:
+  # Límites del NodePool
+  limits:
+    cpu: 1000
+    memory: 1000Gi
+  
+  template:
+    metadata:
+      labels:
+        nodepool: "graviton"
+        arch: "arm64"
+    spec:
+      nodeClassRef:
+        group: karpenter.k8s.aws
+        kind: EC2NodeClass
+        name: graviton-nodeclass
+      
+      requirements:
+        - key: kubernetes.io/arch
+          operator: In
+          values: ["arm64"]
+        - key: node.kubernetes.io/instance-type
+          operator: In
+          values: 
+            - "m6g.medium"
+            - "m6g.large"
+            - "m6g.xlarge"
+            - "m6g.2xlarge"
+            - "m6g.4xlarge"
+            - "c6g.medium"
+            - "c6g.large"
+            - "c6g.xlarge"
+            - "c6g.2xlarge"
+            - "c6g.4xlarge"
+            - "r6g.medium"
+            - "r6g.large"
+            - "r6g.xlarge"
+            - "r6g.2xlarge"
+        - key: karpenter.sh/capacity-type
+          operator: In
+          values: ["spot"]
+      terminationGracePeriod: 30s

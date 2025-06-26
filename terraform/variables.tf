@@ -32,3 +32,7 @@ variable "env" {
     type = string
     description = "Project Environment"
 }
+
+variable "tags" {
+    type = map(string)
+}
