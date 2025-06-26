@@ -63,12 +63,10 @@ resource "aws_iam_policy" "karpenter_controller_pass_role" {
   tags = var.tags
 }
 
-# Adjuntar la política adicional al rol del controlador de Karpenter
 resource "aws_iam_role_policy_attachment" "karpenter_controller_pass_role" {
   policy_arn = aws_iam_policy.karpenter_controller_pass_role.arn
   role       = module.karpenter.iam_role_name
 }
-
 
 resource "helm_release" "karpenter" {
   namespace        = "kube-system"

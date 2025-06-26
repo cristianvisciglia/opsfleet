@@ -32,18 +32,25 @@ Then apply the infrastructure:
 
 ```bash
 terraform init
-terraform apply -target=module.eks
 terraform apply
 ```
-### ⚙️ Post-Deployment Setup
-After Terraform finishes, configure your local kubectl:
+Once Terraform is done, run the following to create Karpenter's Node Pools and NodeClasses.
+
 ```bash
-aws eks update-kubeconfig --region <your-region> --name <your-cluster-name>
+export NODE_ROLE=$(terraform output -raw node_role)
+export CLUSTER_NAME=$(terraform output -raw cluster_name)
+export AWS_REGION=$(terraform output -raw aws_region)
+envsubst < ./modules/karpenter/templates/karpenter.yaml > karpenter_resources.yaml
 ```
-Verify access:
+Configure your local kubectl:
 ```bash
-kubectl get nodes
+aws eks update-kubeconfig --name $CLUSTER_NAME --region $AWS_REGION
 ```
+Apply manifests
+```bash
+kubectl apply -f karpenter_resources.yaml
+```
+
 ## 🧑‍💻 How Developers Can Deploy Pods
 Karpenter provisions nodes on-demand based on pod requirements. Developers can request either x86_64 or ARM64 (Graviton) nodes using node affinity.
 
