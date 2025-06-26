@@ -252,7 +252,8 @@ Amazon RDS Proxy provides significant advantages for application scalability and
 │  └─────────────────────────────────────────────────────────┘   │
 └─────────────────────────────────────────────────────────────────┘
 ```
-![image](https://github.com/user-attachments/assets/dbb4843d-fd9d-48c4-a335-37b9a007cd1d)
+
+![image](https://github.com/user-attachments/assets/fa576a87-cbf4-4044-815e-d2774403e8bf)
 
 
 ## Conclusion
