@@ -212,7 +212,7 @@ Amazon RDS Proxy provides significant advantages for application scalability and
 │                          AWS Cloud                              │
 │                                                                 │
 │  ┌─────────────────────────────────────────────────────────┐   │
-│  │                    VPC (10.0.0.0/16)                   │   │
+│  │                    VPC                                  │   │
 │  │                                                         │   │
 │  │  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐    │   │
 │  │  │   Public    │  │   Public    │  │   Public    │    │   │
@@ -252,6 +252,8 @@ Amazon RDS Proxy provides significant advantages for application scalability and
 │  └─────────────────────────────────────────────────────────┘   │
 └─────────────────────────────────────────────────────────────────┘
 ```
+![image](https://github.com/user-attachments/assets/dbb4843d-fd9d-48c4-a335-37b9a007cd1d)
+
 
 ## Conclusion
 
