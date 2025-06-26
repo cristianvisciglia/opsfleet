@@ -33,6 +33,12 @@ variable "env" {
     description = "Project Environment"
 }
 
+variable "cluster_version" {
+  type = string
+  description = "EKS Kubernetes version"
+  default = "1.32"
+}
+
 variable "tags" {
     type = map(string)
 }

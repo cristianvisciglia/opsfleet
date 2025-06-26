@@ -12,7 +12,7 @@ terraform {
 }
 
 provider "aws" {
-  alias = "virginia"
+  alias  = "virginia"
   region = "us-east-1"
 }
 
@@ -24,7 +24,7 @@ module "karpenter" {
   source  = "terraform-aws-modules/eks/aws//modules/karpenter"
   version = "~> 20.37.1"
 
-  cluster_name = var.cluster_name
+  cluster_name                    = var.cluster_name
   enable_v1_permissions           = true
 
   node_iam_role_use_name_prefix   = false
@@ -32,9 +32,6 @@ module "karpenter" {
   node_iam_role_name              = "KarpenterNodeRole-${var.cluster_name}"
   create_instance_profile = true
   create_pod_identity_association = true
-
-  #enable_pod_identity             = true
-  #create_pod_identity_association = true
 
   node_iam_role_additional_policies = {
     AmazonSSMManagedInstanceCore = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"

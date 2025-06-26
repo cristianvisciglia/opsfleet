@@ -20,15 +20,15 @@ module "vpc" {
   name       = "${local.name_prefix}-vpc"
   cidr_block = var.cidr_block
   
-  azs        = slice(data.aws_availability_zones.available.names, 0, 3)
+  azs             = slice(data.aws_availability_zones.available.names, 0, 3)
   private_subnets = var.private_subnets
-  public_subnets = var.public_subnets
+  public_subnets  = var.public_subnets
 
   enable_natgw = true
   single_natgw = true #Nonprod, testing
   
   private_subnet_names = ["${local.name_prefix}-private-subnet"]
-  public_subnet_names = ["${local.name_prefix}-public-subnet"]
+  public_subnet_names  = ["${local.name_prefix}-public-subnet"]
 
   cluster_name = "${var.env}-${var.project}-cluster"
   
@@ -37,10 +37,10 @@ module "vpc" {
 module "eks" {
     source = "./modules/eks"
 
-    cluster_name = "${var.env}-${var.project}-cluster"
-    vpc_id = module.vpc.vpc_id
+    cluster_name       = "${var.env}-${var.project}-cluster"
+    vpc_id             = module.vpc.vpc_id
     private_subnet_ids = module.vpc.private_subnet_ids
-    cluster_version = "1.32"
+    cluster_version    = "${var.cluster_version}"
 
 }
 
@@ -65,14 +65,13 @@ provider "helm" {
 }
 
 module "karpenter" {
-    source = "./modules/karpenter"
-    cluster_name = module.eks.cluster_name
+    source           = "./modules/karpenter"
+    cluster_name     = module.eks.cluster_name
     cluster_endpoint = module.eks.cluster_endpoint
-    iam_role_name = module.eks.iam_role_name
+    iam_role_name    = module.eks.iam_role_name
 
     providers = {
       kubernetes = kubernetes.karpenter
-      helm = helm.karpenter
+      helm       = helm.karpenter
     }
-
 }

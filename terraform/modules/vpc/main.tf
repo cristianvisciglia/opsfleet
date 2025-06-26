@@ -10,7 +10,7 @@ terraform {
 data "aws_availability_zones" "available" {}
 
 module "vpc" {
-    source = "terraform-aws-modules/vpc/aws"
+    source  = "terraform-aws-modules/vpc/aws"
     version = "5.21.0"
 
     name = var.name
@@ -21,7 +21,7 @@ module "vpc" {
     public_subnets      = var.public_subnets
 
     private_subnet_names = var.private_subnet_names
-    public_subnet_names = var.public_subnet_names
+    public_subnet_names  = var.public_subnet_names
 
     manage_default_network_acl    = true
     manage_default_route_table    = true
@@ -34,7 +34,7 @@ module "vpc" {
     single_nat_gateway = var.single_natgw
 
     public_subnet_tags = {
-    "kubernetes.io/role/elb" = 1
+      "kubernetes.io/role/elb" = 1
     }
 
     private_subnet_tags = {
