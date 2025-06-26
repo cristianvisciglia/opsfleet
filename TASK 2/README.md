@@ -207,52 +207,6 @@ Amazon RDS Proxy provides significant advantages for application scalability and
 
 ## High-Level Architecture Diagram
 
-```
-┌─────────────────────────────────────────────────────────────────┐
-│                          AWS Cloud                              │
-│                                                                 │
-│  ┌─────────────────────────────────────────────────────────┐   │
-│  │                    VPC                                  │   │
-│  │                                                         │   │
-│  │  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐    │   │
-│  │  │   Public    │  │   Public    │  │   Public    │    │   │
-│  │  │  Subnet     │  │  Subnet     │  │  Subnet     │    │   │
-│  │  │   AZ-1      │  │   AZ-2      │  │   AZ-3      │    │   │
-│  │  │             │  │             │  │             │    │   │
-│  │  │    ALB      │  │    ALB      │  │    ALB      │    │   │
-│  │  │             │  │             │  │             │    │   │
-│  │  └─────────────┘  └─────────────┘  └─────────────┘    │   │
-│  │                                                         │   │
-│  │  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐    │   │
-│  │  │   Private   │  │   Private   │  │   Private   │    │   │
-│  │  │   Subnet    │  │   Subnet    │  │   Subnet    │    │   │
-│  │  │    AZ-1     │  │    AZ-2     │  │    AZ-3     │    │   │
-│  │  │             │  │             │  │             │    │   │
-│  │  │ EKS Nodes   │  │ EKS Nodes   │  │ EKS Nodes   │    │   │
-│  │  │ (Frontend+  │  │ (Frontend+  │  │ (Frontend+  │    │   │
-│  │  │  Backend)   │  │  Backend)   │  │  Backend)   │    │   │
-│  │  │             │  │             │  │             │    │   │
-│  │  └─────────────┘  └─────────────┘  └─────────────┘    │   │
-│  │                                                         │   │
-│  │  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐    │   │
-│  │  │  Database   │  │  Database   │  │  Database   │    │   │
-│  │  │   Subnet    │  │   Subnet    │  │   Subnet    │    │   │
-│  │  │    AZ-1     │  │    AZ-2     │  │    AZ-3     │    │   │
-│  │  │             │  │             │  │             │    │   │
-│  │  │ RDS Primary │  │RDS Standby  │  │ Read Replica│    │   │
-│  │  │             │  │             │  │             │    │   │
-│  │  └─────────────┘  └─────────────┘  └─────────────┘    │   │
-│  └─────────────────────────────────────────────────────────┘   │
-│                                                                 │
-│  ┌─────────────────────────────────────────────────────────┐   │
-│  │                  Supporting Services                    │   │
-│  │                                                         │   │
-│  │  ECR Registry  │  CodePipeline  │  CloudWatch  │  IAM   │   │
-│  │  KMS           │  Route 53      │  WAF         │  S3    │   │
-│  └─────────────────────────────────────────────────────────┘   │
-└─────────────────────────────────────────────────────────────────┘
-```
-
 ![image](https://github.com/user-attachments/assets/fa576a87-cbf4-4044-815e-d2774403e8bf)
 
 
